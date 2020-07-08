@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { closeAppAction, rateAppDispatch } from '../Actions/dataAction';
+import {
+  closeAppAction,
+  rateAppDispatch,
+  showAppsDispatch,
+} from '../Actions/dataAction';
 
 const UserModal = ({
   data,
@@ -12,6 +16,7 @@ const UserModal = ({
   id,
   setId,
   rateAppDispatch,
+  showAppsDispatch,
 }) => {
   const { userApps } = data;
 
@@ -25,7 +30,8 @@ const UserModal = ({
 
   const handleRating = async (e) => {
     setRating(e.target.value);
-    rateAppDispatch(id, e.target.value);
+    await rateAppDispatch(id, e.target.value);
+    await showAppsDispatch(id);
   };
 
   return (
@@ -49,14 +55,14 @@ const UserModal = ({
               <div className='d-flex flex-column w-100'>
                 <span className='font-weight-bold'>{app.title}</span>
                 <span className='mt-3'>Rate the app</span>
-                <span className='my-2'>Current Rating: {app.rating}</span>
+                <span className='my-2'>Current Rating: {app.rating}/5</span>
                 <input
                   type='range'
                   className='mt-3'
-                  max={10}
+                  max={5}
                   min={0}
                   defaultValue={app.rating}
-                  onChange={handleRating}
+                  onMouseLeave={handleRating}
                 />
               </div>
             </ModalBody>
@@ -74,6 +80,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       closeAppAction,
       rateAppDispatch,
+      showAppsDispatch,
     },
     dispatch
   );
