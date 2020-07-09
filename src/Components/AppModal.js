@@ -55,7 +55,7 @@ const UserModal = ({
               <div className='d-flex flex-column w-100'>
                 <span className='font-weight-bold'>{app.title}</span>
                 <span className='mt-3'>Rate the app</span>
-                <span className='my-2'>Current Rating: {app.rating}/5</span>
+                <span className='my-1'>Last Rated: {app.rating}/5</span>
                 <input
                   type='range'
                   className='mt-3'
