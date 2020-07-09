@@ -63,6 +63,7 @@ const UserModal = ({
                   min={0}
                   defaultValue={app.rating}
                   onMouseLeave={handleRating}
+                  onTouchEnd={handleRating}
                 />
               </div>
             </ModalBody>
